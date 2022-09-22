@@ -342,6 +342,17 @@ objects:
               - name: pinhead
                 secret:
                   secretName: pinhead
+        - name: public
+          webServices:
+            public:
+              enabled: true
+          minReplicas: 1
+          podSpec:
+            image: quay.io/app-sre/ubi8-ubi
+            command:
+              - /usr/libexec/platform-python
+              - -m
+              - http.server
 
       jobs:
         - name: sync

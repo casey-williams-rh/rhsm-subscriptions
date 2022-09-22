@@ -1,0 +1,19 @@
+---
+services:
+  nginx:
+    image: nginx
+    volumes:
+    - ./swatch-api.conf.template:/etc/nginx/conf.d/swatch-api.conf.template
+    ports:
+    - "8000:8080"
+    environment:
+    - SERVICE_NAME=swatch-api
+    - SWATCH_TALLY_POD=localhost
+    - SWATCH_METRICS_POD=localhost
+    - SWATCH_SUBSCRIPTIONS_POD=localhost
+    - SWATCH_SWORG_POD=localhost
+    - SWATCH_BILLING_POD=localhost
+    - SWATCH_PRODUCER_AWS_POD=localhost
+    - SWATCH_PRODUCER_RED_HAT_MARKETPLACE_POD=localhost
+    - API_PORT=8000
+    command: /bin/bash -c "envsubst < /etc/nginx/conf.d/swatch-api.conf.template > /etc/nginx/conf.d/default.conf && cat /etc/nginx/conf.d/default.conf && nginx -g 'daemon off;'"
