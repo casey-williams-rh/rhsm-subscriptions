@@ -1,9 +1,9 @@
 upstream swatch-tally {
-  server ${PRIVATE_API_SERVER}:${PRIVATE_API_PORT};
+  server ${SWATCH_TALLY_POD}:${API_PORT};
 }
 
 upstream swatch-metrics {
-  server ${PUBLIC_API_SERVER}:${API_PORT};
+  server ${SWATCH_METRICS_POD}:${API_PORT};
 }
 
 upstream swatch-subscriptions {
